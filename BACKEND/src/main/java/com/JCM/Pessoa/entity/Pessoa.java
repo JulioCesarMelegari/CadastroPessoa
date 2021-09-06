@@ -1,6 +1,7 @@
 package com.JCM.Pessoa.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ public class Pessoa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pessoa_id")
 	private Long id;
 	
 	@Column(nullable = false)
@@ -31,7 +33,7 @@ public class Pessoa {
 	
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
-	private List<Contato> contatos;
+	private List<Contato> contatos = new ArrayList<>();
 
 	public Pessoa() {
 	
