@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name="tb_contato")
@@ -23,6 +24,7 @@ public class Contato {
 	@Column(nullable = false)
 	private String telefone;
 	
+	@Email(message = "{contato.descricao.email}")
 	@Column(nullable = false)
 	private String email;
 	
