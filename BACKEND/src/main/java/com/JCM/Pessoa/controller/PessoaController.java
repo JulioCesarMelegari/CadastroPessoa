@@ -1,8 +1,8 @@
 package com.JCM.Pessoa.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +19,8 @@ public class PessoaController {
 	private PessoaService service;
 	
 	@GetMapping
-	public ResponseEntity<List<PessoaDTO>> findAll(){
-		List<PessoaDTO> list = service.findAll();
+	public ResponseEntity<Page<PessoaDTO>> findAll(Pageable pageable){
+		Page<PessoaDTO> list = service.findAll(pageable);
 		return ResponseEntity.ok(list);
 	}
 }

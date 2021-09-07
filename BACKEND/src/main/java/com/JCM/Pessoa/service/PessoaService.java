@@ -1,9 +1,9 @@
 package com.JCM.Pessoa.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.JCM.Pessoa.dto.PessoaDTO;
@@ -16,9 +16,9 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository repository;
 	
-	public List<PessoaDTO> findAll(){
-		List<Pessoa> result = repository.findAll();
-		return result.stream().map(x -> new PessoaDTO(x)).collect(Collectors.toList());
+	public Page<PessoaDTO> findAll(Pageable pageable){
+		Page<Pessoa> result = repository.findAll(pageable);
+		return result.map(x -> new PessoaDTO(x));
 	}
 
 }
