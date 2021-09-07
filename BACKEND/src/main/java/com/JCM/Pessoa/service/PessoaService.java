@@ -1,12 +1,14 @@
 package com.JCM.Pessoa.service;
 
 
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.JCM.Pessoa.dto.PessoaDTO;
 import com.JCM.Pessoa.entity.Pessoa;
 import com.JCM.Pessoa.repository.PessoaRepository;
@@ -22,16 +24,21 @@ public class PessoaService {
 		return result.map(x -> new PessoaDTO(x));
 	}
 	
-	public Pessoa pessoaId(@PathVariable Long id) {
-		return repository.findById(id).orElse(null);
+	public Pessoa pessoaId(Long id) {
+		return repository.findById(id).orElseThrow(()-> new EntityNotFoundException());
 	}
 	
-	public Pessoa salvarPessoa(@RequestBody Pessoa pessoa) {
+	public Pessoa salvarPessoa(Pessoa pessoa) {
 		return repository.save(pessoa);
 	}
 	
-	public void excluirPessoa(@PathVariable Long id) {
+	public void excluirPessoa(Long id) {
 		repository.deleteById(id);
+	}
+	
+	public List<Pessoa> listarTodos(){
+		return repository.findAll();
+		
 	}
 
 }

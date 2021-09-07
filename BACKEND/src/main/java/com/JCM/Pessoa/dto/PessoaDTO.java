@@ -3,6 +3,12 @@ package com.JCM.Pessoa.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.JCM.Pessoa.entity.Pessoa;
 
 public class PessoaDTO implements Serializable {
@@ -10,8 +16,17 @@ public class PessoaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotBlank(message="{pessoa.descricao.not-blank}")
+	@Column(nullable = false)
 	private String nome;
+	
+	@CPF(message = "{pessoa.descricao.cpf}")
+	@Column(nullable = false, unique = true)
 	private String cpf;
+	
+	@PastOrPresent(message = "{pessoa.descricao.past-or-present}")
+	@Column(nullable = false)
 	private LocalDate datanasc;
 	
 	public PessoaDTO() {

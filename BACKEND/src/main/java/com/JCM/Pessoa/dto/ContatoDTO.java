@@ -2,6 +2,9 @@ package com.JCM.Pessoa.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+
 import com.JCM.Pessoa.entity.Contato;
 
 public class ContatoDTO implements Serializable {
@@ -9,9 +12,18 @@ public class ContatoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String telefone;
+	
+	@Email(message = "{contato.descricao.email}")
+	@Column(nullable = false)
 	private String email;
+	
+	
 	private PessoaDTO pessoaDto;
 	
 	public ContatoDTO() {
